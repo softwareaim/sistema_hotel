@@ -73,7 +73,4 @@ public class HabitacionControlador {
         return "redirect:/habitacion/listar";
     }
 
-
-
-
 }
