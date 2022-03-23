@@ -25,78 +25,64 @@
 <!--Menu para el administrador-->
 <div th:replace="layout/menu-admin :: menu-admin"></div>
 <!--Botones-->
-<div class="posicionboton">
-    <button class="btn btn-dark boton2">
-        <a th:href="@{/habitacion/listar}">Listado de Habitaciones</a>
-    </button>
-    <button type="submit" class="btn btn-dark boton2">
-        <a th:href="@{/}">Inicio</a>
-    </button>
-</div>
-
-<div class="form">
-    <div class="titulo">
-    <header>
-        <h2 th:text="${titulo}"></h2>
-    </header>
-</div>
-
-<form th:action="@{/habitacion/crear}" th:object="${habitacion}" method="post" class="formularioHotel">
-    <input type="hidden" th:field="*{id}">
-    <div>
-        <label for="nombre">Nombre: </label>
-        <input id="nombre" type="text" placeholder="Nombre" th:field="*{nombre}" required/>
+<div class="container">
+    <div class="d-flex justify-content-center mt-5">
+        <a class="btn btn-warning mt-3" role="button"
+           th:href="@{/habitacion/listar}">Listado</a>
     </div>
+</div>
 
-    <div class="textarea">
-        <label for="descripcion">Descripción: </label>
-        <br/>
-        <textarea name="descripcion" id="descripcion" cols="20" rows="2"
+    <div class="form">
+        <div>
+            <h1 class="titulo" th:text="${titulo}">titulo</h1>
+        </div>
+        <form th:action="@{/habitacion/crear}" th:object="${habitacion}" method="post" class="formularioHotel">
+            <input type="hidden" th:field="*{id}">
+            <div>
+                <input class="cajas" id="nombre" type="text" placeholder="Nombre" th:field="*{nombre}" required/>
+            </div>
+
+            <div>
+                <input class="cajas" id="precio" type="number" placeholder="Precio en pesos" th:field="*{precio}"
+                       required/>
+            </div>
+
+            <div class="select">
+                <select class="form-select cajas" name="estado" th:field="*{estado}">
+                    <option th:each="estado : ${T(com.grupo6.app.enums.Estado).values()}"
+                            th:value="${estado}" th:text="${estado}"></option>
+                </select>
+            </div>
+            <div class="select">
+                <select id="categoriaList" class="form-select cajas" th:object="${habitacion}"
+                        th:field="*{categoria.id}">
+                    <option th:each="categoria : ${categoriaList}"
+                            th:value="${categoria.id}"
+                            th:text="${categoria.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="select">
+                <select id="niveles" class="form-select cajas" th:object="${habitacion}" th:field="*{nivel.id}">
+                    <option th:each="nivel : ${niveles}"
+                            th:value="${nivel.id}"
+                            th:text="${nivel.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="textarea">
+        <textarea name="descripcion" id="descripcion" cols="46" rows="8"
                   placeholder="Descripción de la Habitacion"
                   th:field="*{descripcion}"
                   required class="textarea">
         </textarea>
+            </div>
+            <div class="d-flex justify-content-evenly">
+                <button id="modal" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
     </div>
 
-    <div>
-        <label for="precio"></label>
-        <input id="precio" type="number" placeholder="Precio en pesos" th:field="*{precio}" required/>
-    </div>
-
-    <div class="select">
-        <select class="form-select" name="estado" th:field="*{estado}">
-            <option th:each="estado : ${T(com.grupo6.app.enums.Estado).values()}"
-                    th:value="${estado}" th:text="${estado}"></option>
-        </select>
-    </div>
-    <div class="select">
-        <select id="categoriaList" class="form-select" th:object="${habitacion}" th:field="*{categoria.id}">
-            <option th:each="categoria : ${categoriaList}"
-                    th:value="${categoria.id}"
-                    th:text="${categoria.nombre}"></option>
-        </select>
-    </div>
-
-    <div class="select">
-        <select id="niveles" class="form-select" th:object="${habitacion}" th:field="*{nivel.id}">
-            <option th:each="nivel : ${niveles}"
-                    th:value="${nivel.id}"
-                    th:text="${nivel.nombre}"></option>
-        </select>
-    </div>
-
-<!--    <div>-->
-<!--        <div class="select">-->
-<!--            <select class="form-select" id="select2" th:field="*{reserva}">-->
-<!--                <option value="1" selected>Reserva</option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        </select>-->
-<!--    </div>-->
-
-    <button type="submit" class="btn btn-info" id="boton">Registrar</button>
-</form>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

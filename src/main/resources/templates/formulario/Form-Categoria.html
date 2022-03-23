@@ -25,15 +25,9 @@
 <div th:replace="layout/menu-admin :: menu-admin"></div>
 
   <!--Botones-->
-  <div class="posicionboton">
-    <button class="btn btn-dark boton2" >
-      <a th:href="@{/categoria/listar}">Listado de Categoria</a>
-    </button>
-    <button class="btn btn-dark boton2" >
-      <a th:href="@{/}">Inicio</a>
-    </button>
-  </div>
-
+<div class="d-flex justify-content-center">
+  <a class="btn btn-warning mt-5" role="button" th:href="@{/categoria/listar}">Listar</a>
+</div>
 
   <div class="form">
     <div class="titulo">

@@ -28,6 +28,7 @@ public class ClienteControlador {
     @GetMapping("/crear")
     public String crearClienteGet(Model model){
         model.addAttribute("cliente",new Cliente());
+        model.addAttribute("titulo","Regitrar Cliente");
         return "formulario/Form-Cliente";
     }
 
